@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+
+# Local runtime data (SQLite DBs & uploaded images)
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Environment & secrets
+.env
+.env.*
+
+# JetBrains / IntelliJ / Android Studio / GoLand
+.idea/
+*.iml
+
+# Gradle / Kotlin / Android
+.gradle/
+build/
+local.properties
+*.apk
+*.aab
+captures/
+
+# Go
+backend-go/bin/
+*.test
+*.out
+
+# Xcode / iOS
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+DerivedData/
+.build/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
