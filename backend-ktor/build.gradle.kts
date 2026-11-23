@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.exposed.core)
     implementation(libs.exposed.jdbc)
     implementation(libs.sqlite.jdbc)
+    implementation(ktorLibs.server.statusPages)
 
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)

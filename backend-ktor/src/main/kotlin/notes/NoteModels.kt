@@ -9,6 +9,12 @@ data class CreateNoteRequest(
 )
 
 @Serializable
+data class UpdateNoteRequest(
+    val title: String,
+    val content: String= "",
+)
+
+@Serializable
 data class NoteResponse(
     val id: String,
     val title: String,

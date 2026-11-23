@@ -71,7 +71,7 @@ MD Notes/
 ### Faza 1 — Ktor Backend (`backend-ktor/`, port `8080`)
 - **M1 — Skeleton & Health Check:** ✅ Inicijalizacija projekta, JSON serijalizacija i `GET /health`.
 - **M2 — SQLite (Exposed) & Create/Read Notes:** ✅ Spajanje na SQLite, tablica `notes`, `POST /api/notes`, `GET /api/notes`, `GET /api/notes/{id}`.
-- **M3 — Update, Delete & Validacija:** `PUT /api/notes/{id}`, `DELETE /api/notes/{id}`, validacija i standardizirani error odgovori (`StatusPages`).
+- **M3 — Update, Delete & Validacija:** ✅ `PUT /api/notes/{id}`, `DELETE /api/notes/{id}`, validacija i standardizirani error odgovori (`StatusPages`).
 - **M4 — Images Upload & Serving:** `POST /api/images` (`multipart/form-data`), spremanje na disk, validacija tipa/veličine, `GET /api/images/{id}` i `DELETE /api/images/{id}`.
 
 ### Faza 2 — Mobilne aplikacije (Android Native & iOS Native)

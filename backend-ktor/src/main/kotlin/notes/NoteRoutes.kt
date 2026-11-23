@@ -1,11 +1,14 @@
 package com.delminius.notes
 
+import com.delminius.plugins.ApiException
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
+import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
+import io.ktor.server.routing.put
 import io.ktor.server.routing.route
 
 fun Route.notesRoutes(repository: NoteRepository) {
@@ -24,8 +27,32 @@ fun Route.notesRoutes(repository: NoteRepository) {
 
         post {
             val request = call.receive<CreateNoteRequest>()
-            val created = repository.create(request)
-            call.respond(status = HttpStatusCode.Created, created)
+            validateNote(request.title, request.content)
+
+            val created = repository.create(request.copy(title = request.title.trim()))
+            call.respond(status = HttpStatusCode.Created, message = created)
+        }
+
+        put("/{id}") {
+            val id = call.parameters["id"]
+                ?: throw ApiException(HttpStatusCode.BadRequest, "VALIDATION_ERROR", "Missing note id")
+
+            val request = call.receive<UpdateNoteRequest>()
+            validateNote(request.title, request.content)
+
+            val updated = repository.update(id, request.copy(title = request.title.trim()))
+                ?: throw ApiException(HttpStatusCode.NotFound, "NOT_FOUND", "Note not found")
+            call.respond(updated)
+        }
+
+        delete("/{id}") {
+            val id = call.parameters["id"]
+                ?: return@delete call.respond(HttpStatusCode.BadRequest)
+            val deleted = repository.delete(id)
+            if (!deleted) {
+                return@delete call.respond(HttpStatusCode.NotFound)
+            }
+            call.respond(HttpStatusCode.NoContent)
         }
     }
 }
