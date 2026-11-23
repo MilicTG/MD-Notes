@@ -1,14 +1,13 @@
 # Data Model & Storage — MD Notes
 
-Ova specifikacija definira strukturu podataka i način spremanja za **oba backenda** (Ktor i Go). Cilj je da oba backenda koriste isti logički model i SQLite bazu (svaki svoju lokalnu `.db` datoteku).
+Ova specifikacija definira strukturu podataka i način spremanja za Ktor backend (SQLite + JetBrains Exposed DSL).
 
 ---
 
 ## 1. Baza podataka: SQLite
 
-- **Ktor backend:** `backend-ktor/data/notes.db`
-- **Go backend:** `backend-go/data/notes.db`
-- **Slike na disku:** lokalni folder `data/uploads/` unutar svakog backenda (ne spremamo binarne slike u SQLite `BLOB`, već samo metapodatke u bazu, a samu datoteku na disk).
+- **Baza podataka:** `backend-ktor/data/notes.db`
+- **Slike na disku:** lokalni folder `backend-ktor/data/uploads/` (ne spremamo binarne slike u SQLite `BLOB`, već samo metapodatke u bazu, a samu datoteku na disk).
 
 > **Zašto slike na disk, a ne u bazu?**
 > Jednostavnije serviranje preko HTTP-a, manja baza podataka i realan obrazac koji se kasnije lako zamijeni s S3 / Cloud Storageom.

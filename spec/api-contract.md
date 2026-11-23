@@ -1,16 +1,12 @@
 # REST API Contract — MD Notes
 
-Ovaj dokument je **jedini izvor istine** (*Single Source of Truth*) za komunikaciju između mobilnih aplikacija (Android, iOS) i oba backenda (Ktor, Go).
-
-Oba backenda moraju vraćati **identične rute, status kodove i JSON strukture**.
+Ovaj dokument je **jedini izvor istine** (*Single Source of Truth*) za komunikaciju između mobilnih aplikacija (Android, iOS) i Ktor backenda.
 
 ---
 
 ## 1. Opće konvencije
 
-- **Portovi (za paralelni rad):**
-  - Ktor backend: `http://localhost:8080`
-  - Go backend: `http://localhost:8081`
+- **Base URL (lokalno):** `http://localhost:8080`
 - **Format podataka:** `application/json` (osim za upload i dohvat slika).
 - **Imenovanje JSON polja:** `camelCase` (`createdAt`, `updatedAt`, `mimeType`, `sizeBytes`).
 - **Datumi:** ISO-8601 UTC string (`2026-11-21T18:30:00Z`).
@@ -49,7 +45,6 @@ Provjera radi li server.
   "service": "md-notes-ktor"
 }
 ```
-*(Go backend vraća `"service": "md-notes-go"` — jedina razlika, korisna da u aplikaciji odmah znaš na koji si backend spojen.)*
 
 ---
 
@@ -186,9 +181,9 @@ Briše zapis iz baze i datoteku s diska.
 
 ---
 
-## 5. Kriterij završetka (Parity Check)
+## 5. Kriterij završetka (Verifikacija)
 
-Za svaki milestone, oba backenda (`:8080` i `:8081`) moraju proći iste ručne testove (npr. preko `curl` ili HTTP klijenta):
+Za svaki milestone backend na `http://localhost:8080` mora proći ove ručne testove (npr. preko `curl` ili HTTP klijenta):
 1. `GET /health` vraća `200` i odgovarajući `service` naziv.
 2. `POST /api/notes` kreira bilješku i vraća `201`.
 3. `GET /api/notes` vraća niz s tom bilješkom.

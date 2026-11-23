@@ -21,6 +21,9 @@ dependencies {
     implementation(libs.logback.classic)
     implementation(ktorLibs.server.contentNegotiation)
     implementation(ktorLibs.serialization.kotlinx.json)
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
+    implementation(libs.sqlite.jdbc)
 
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)
